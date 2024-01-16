@@ -1,0 +1,32 @@
+diff --git a/node_modules/next/dist/build/index.js b/node_modules/next/dist/build/index.js
+index d26e021..fa07f93 100644
+--- a/node_modules/next/dist/build/index.js
++++ b/node_modules/next/dist/build/index.js
+@@ -1706,8 +1706,9 @@ async function build(dir, reactProductionProfiling = false, debugOutput = false,
+                             }
+                         });
+                     }
+-                    // If there's /not-found inside app, we prefer it over the pages 404
+-                    if (hasStaticApp404) {
++                    // If there's /not-found inside app, we only prefer it if the pages 404 is missing
++                    // Since the default /not-found always exists
++                    if (hasStaticApp404 && !hasPages404) {
+                         await moveExportedAppNotFoundTo404();
+                     } else {
+                         // Only move /404 to /404 when there is no custom 404 as in that case we don't know about the 404 page
+diff --git a/node_modules/next/dist/esm/build/index.js b/node_modules/next/dist/esm/build/index.js
+index 0973131..3d418f6 100644
+--- a/node_modules/next/dist/esm/build/index.js
++++ b/node_modules/next/dist/esm/build/index.js
+@@ -1640,8 +1640,9 @@ export default async function build(dir, reactProductionProfiling = false, debug
+                             }
+                         });
+                     }
+-                    // If there's /not-found inside app, we prefer it over the pages 404
+-                    if (hasStaticApp404) {
++                    // If there's /not-found inside app, we only prefer it if the pages 404 is missing
++                    // Since the default /not-found always exists
++                    if (hasStaticApp404 && !hasPages404) {
+                         await moveExportedAppNotFoundTo404();
+                     } else {
+                         // Only move /404 to /404 when there is no custom 404 as in that case we don't know about the 404 page
